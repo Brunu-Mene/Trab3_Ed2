@@ -1,5 +1,11 @@
 {
     "files.associations": {
-        "utilidades.h": "c"
+        "utilidades.h": "c",
+        "string.h": "c",
+        "heuristicas.h": "c",
+        "HEURISTICAS.H": "cpp",
+        "vector.h": "c",
+        "worst_fit.h": "c",
+        "disco.h": "c"
     }
 }

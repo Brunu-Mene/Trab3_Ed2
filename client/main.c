@@ -1,12 +1,18 @@
-#include <stdio.h>
-#include "Utilidades.h"
+#include "../include/FilaPrioridade.h"
 
 int main(int argv, char ** args){
-    tamArquivos *estrutura = inicializaEstrutura();
-    preencheEstrutura(estrutura, args[1]);
+    vector *vet = inicializaVector();
+    preencheVector(vet, args[1]);
+    filaPrioridade *fp = inicializaFP(vet);
+    worstFit(fp,vet);
+    printf("%d\n",getQtdDiscos(fp));
+    //
+    filaPrioridade *fp2 = inicializaFP(vet);
+    worstFitOrdenado(fp2,vet);
+    printf("%d\n",getQtdDiscos(fp2));
 
-
-
-    liberaEstrutura(estrutura);
+    liberaVector(vet);
+    liberaFilaPrioridade(fp);
+    liberaFilaPrioridade(fp2);
     return 0;
 }
