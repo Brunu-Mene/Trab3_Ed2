@@ -9,19 +9,19 @@ int main(int argv, char ** args){
 
     filaPrioridade *fp = inicializaFP(vet);
     worstFit(fp,vet);
-    printf("%d\n",getQtdDiscos(fp));
-    //
-    filaPrioridade *fp2 = inicializaFP(vetOrdenado);
-    worstFit(fp2,vetOrdenado);
-    printf("%d\n",getQtdDiscos(fp2));
+    printf("worst fit: %d\n",getQtdDiscos(fp));
     //
     filaPrioridade *fp3 = inicializaFP(vet);
     bestFit(fp3,vet);
-    printf("%d\n",getQtdDiscos(fp3));
+    printf("best fit: %d\n",getQtdDiscos(fp3));
+    //
+    filaPrioridade *fp2 = inicializaFP(vetOrdenado);
+    worstFit(fp2,vetOrdenado);
+    printf("worst fit ordenado: %d\n",getQtdDiscos(fp2));
     //
     filaPrioridade *fp4 = inicializaFP(vetOrdenado);
     bestFit(fp4,vetOrdenado);
-    printf("%d\n",getQtdDiscos(fp4));
+    printf("best fit ordenado: %d\n",getQtdDiscos(fp4));
 
     liberaVector(vet);
     liberaVector(vetOrdenado);
