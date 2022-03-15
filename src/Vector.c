@@ -41,6 +41,10 @@ int comparaVetor(const void *a, const void *b){
     return (*v2) - (*v1);
 }
 
+void ordenaVetor(vector *vet){
+    qsort(getVetTamanhos(vet),getTam(vet),sizeof(int), comparaVetor);
+}
+
 void liberaVector(vector *vec){
     free(vec->vetTamanhos);
     free(vec);

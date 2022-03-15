@@ -9,7 +9,10 @@ filaPrioridade *inicializaFP(vector* vet){
     filaPrioridade *fp = malloc(sizeof(filaPrioridade));
     fp->vetDisco = malloc(sizeof(disco*)*getTam(vet));
     fp->qtd = 0;
-
+    
+    for(int i=0; i<getTam(vet) ;i++){
+        fp->vetDisco[i] = NULL;
+    }
     return fp;
 }
 
@@ -67,7 +70,7 @@ void worstFit(filaPrioridade *fp, vector *vet){
     setCapacidade(disc,getVetTamanhos(vet)[0]);
     insereFilaPrioridade(fp,disc);
     
-    printf("Pri : %d\n",getCapacidade(fp->vetDisco[0]));
+    
     
     for(int i = 1; i < getTam(vet) ;i++){
         if(getCapacidade(fp->vetDisco[0]) < getVetTamanhos(vet)[i]){
@@ -75,24 +78,71 @@ void worstFit(filaPrioridade *fp, vector *vet){
             setCapacidade(newDisc, getVetTamanhos(vet)[i]);
             insereFilaPrioridade(fp,newDisc);
 
-            printf("New : %d\n",getCapacidade(fp->vetDisco[0]));
+            
         }else{
             setCapacidade(fp->vetDisco[0],getVetTamanhos(vet)[i]);
             rebaixaElemento(fp, 0);
 
-            printf("old : %d\n",getCapacidade(fp->vetDisco[0]));
+           
         }
     }
 }
 
-void worstFitOrdenado(filaPrioridade *fp, vector *vet){
-    qsort(getVetTamanhos(vet),getTam(vet),sizeof(int), comparaVetor);
-    for(int i=0; i<getTam(vet) ;i++){
-        printf("%d\n",getVetTamanhos(vet)[i]);
+void bestFit(filaPrioridade *fp, vector *vet){
+    disco *disc = inicializaDisco();
+    setCapacidade(disc,CAPACIDADE_TOTAL - getVetTamanhos(vet)[0]);
+    insereFilaPrioridade(fp,disc);
+    printf("Pri : %d\n",getCapacidade(fp->vetDisco[0]));
+    for(int i=1; i<getTam(vet) ;i++){
+        if(CAPACIDADE_TOTAL - getCapacidade(fp->vetDisco[0]) < getVetTamanhos(vet)[i]){
+            int index = buscaFila(fp,getVetTamanhos(vet)[i],0);
+            printf("index : %d\n",index);
+            if(index != -1){
+                incrementaCapacidade(fp->vetDisco[index],getVetTamanhos(vet)[i]);
+                promoveElemento(fp, index);  
+                //printf("old : %d\n",getCapacidade(fp->vetDisco[index]));     
+            }
+            else{
+                disco *newDisc = inicializaDisco();
+                setCapacidade(newDisc, CAPACIDADE_TOTAL - getVetTamanhos(vet)[i]);
+                insereFilaPrioridade(fp,newDisc);
+                //printf("New : %d\n",getCapacidade(fp->vetDisco[0]));
+            }
+        }else{
+            incrementaCapacidade(fp->vetDisco[0],getVetTamanhos(vet)[i]);
+            //printf("old2 : %d\n",getCapacidade(fp->vetDisco[0]));
+        }
     }
-    worstFit(fp,vet);
 }
+
 
 int getQtdDiscos(filaPrioridade *fp){
     return fp->qtd;
+}
+
+int buscaFila(filaPrioridade *fp, int tamanhoArq, int filho){
+    int direita = 2*filho + 2, esquerda = 2*filho + 1;
+    if(fp->vetDisco[filho] == NULL)
+        return -1;
+    if(CAPACIDADE_TOTAL - getCapacidade(fp->vetDisco[filho]) >= tamanhoArq)
+        return filho;
+    if(fp->vetDisco[direita] == NULL && fp->vetDisco[esquerda] == NULL){
+        return -1;
+    }else if(fp->vetDisco[direita] == NULL){
+        return buscaFila(fp,tamanhoArq,esquerda);
+    }else if(fp->vetDisco[esquerda] == NULL){
+        return buscaFila(fp,tamanhoArq,direita);
+    }
+    if(getCapacidade(fp->vetDisco[direita]) >= getCapacidade(fp->vetDisco[esquerda])){
+        int id = buscaFila(fp,tamanhoArq,direita);
+        if(id == -1)
+            id = buscaFila(fp,tamanhoArq,esquerda);
+        return id;
+    }
+    else{
+        int id = buscaFila(fp,tamanhoArq,esquerda);
+        if(id == -1)
+            id = buscaFila(fp,tamanhoArq,direita);
+        return id;
+    }
 }

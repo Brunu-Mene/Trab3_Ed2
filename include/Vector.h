@@ -13,6 +13,7 @@ void liberaVector(vector *vec);
 int getTam(vector *vet);
 int *getVetTamanhos(vector *vet);
 int comparaVetor(const void *a, const void *b);
+void ordenaVetor(vector *vet);
 
 
 #endif

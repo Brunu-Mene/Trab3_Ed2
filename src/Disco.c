@@ -19,6 +19,10 @@ void setCapacidade(disco* disc, int tamanhoArq){
     disc->capRestante -= tamanhoArq;
 }
 
+void incrementaCapacidade(disco *disc, int tamanhoArq){
+    disc->capRestante += tamanhoArq;
+}
+
 int getCapacidade(disco *disc){
     return disc->capRestante;
 }

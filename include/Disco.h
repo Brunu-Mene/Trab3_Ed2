@@ -12,6 +12,7 @@ disco* inicializaDisco();
 void liberaDisco(disco *disc);
 void setCapacidade(disco* disc, int tamanhoArq);
 int getCapacidade(disco *disc);
+void incrementaCapacidade(disco *disc, int tamanhoArq);
 
 
 #endif
