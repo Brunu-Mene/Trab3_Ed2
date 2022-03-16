@@ -67,16 +67,16 @@ void liberaFilaPrioridade(filaPrioridade *fp){
 
 void worstFit(filaPrioridade *fp, vector *vet){
     disco *disc = inicializaDisco();
-    setCapacidade(disc,getVetTamanhos(vet)[0]);
+    decrementaCapacidade(disc,getVetTamanhos(vet)[0]);
     insereFilaPrioridade(fp,disc);
     
     for(int i = 1; i < getTam(vet) ;i++){
         if(getCapacidade(fp->vetDisco[0]) < getVetTamanhos(vet)[i]){
             disco *newDisc = inicializaDisco();
-            setCapacidade(newDisc, getVetTamanhos(vet)[i]);
+            decrementaCapacidade(newDisc, getVetTamanhos(vet)[i]);
             insereFilaPrioridade(fp,newDisc);      
         }else{
-            setCapacidade(fp->vetDisco[0],getVetTamanhos(vet)[i]);
+            decrementaCapacidade(fp->vetDisco[0],getVetTamanhos(vet)[i]);
             rebaixaElemento(fp, 0);
         }
     }
@@ -84,7 +84,7 @@ void worstFit(filaPrioridade *fp, vector *vet){
 
 void bestFit(filaPrioridade *fp, vector *vet){
     disco *disc = inicializaDisco();
-    setCapacidade(disc,CAPACIDADE_TOTAL - getVetTamanhos(vet)[0]);
+    decrementaCapacidade(disc,CAPACIDADE_TOTAL - getVetTamanhos(vet)[0]);
     insereFilaPrioridade(fp,disc);
     for(int i=1; i<getTam(vet) ;i++){
         if(CAPACIDADE_TOTAL - getCapacidade(fp->vetDisco[0]) < getVetTamanhos(vet)[i]){
@@ -95,7 +95,7 @@ void bestFit(filaPrioridade *fp, vector *vet){
             }
             else{
                 disco *newDisc = inicializaDisco();
-                setCapacidade(newDisc, CAPACIDADE_TOTAL - getVetTamanhos(vet)[i]);
+                decrementaCapacidade(newDisc, CAPACIDADE_TOTAL - getVetTamanhos(vet)[i]);
                 insereFilaPrioridade(fp,newDisc);
             }
         }else{

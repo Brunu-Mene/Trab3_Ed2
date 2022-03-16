@@ -15,7 +15,7 @@ void liberaDisco(disco *disc){
     free(disc);
 }
 
-void setCapacidade(disco* disc, int tamanhoArq){
+void decrementaCapacidade(disco* disc, int tamanhoArq){
     disc->capRestante -= tamanhoArq;
 }
 

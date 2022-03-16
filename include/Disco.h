@@ -10,8 +10,8 @@ typedef struct disco disco;
 
 disco* inicializaDisco();
 void liberaDisco(disco *disc);
-void setCapacidade(disco* disc, int tamanhoArq);
 int getCapacidade(disco *disc);
+void decrementaCapacidade(disco* disc, int tamanhoArq);
 void incrementaCapacidade(disco *disc, int tamanhoArq);
 
 
