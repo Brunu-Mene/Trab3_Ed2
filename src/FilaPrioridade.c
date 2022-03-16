@@ -109,31 +109,13 @@ void bestFit(filaPrioridade *fp, vector *vet){
     }
 }
 
-
 int getQtdDiscos(filaPrioridade *fp){
     return fp->qtd;
 }
 
-
-int buscaFila2(filaPrioridade *fp, int tamanhoArq, int filho){
-    int direita = 2*filho + 2, esquerda = 2*filho + 1;
-    
-    int valorDir = getCapacidade(fp->vetDisco[direita]);
-    int valorEsq = getCapacidade(fp->vetDisco[esquerda]);
-    if(((CAPACIDADE_TOTAL - valorDir) >= tamanhoArq) && (valorDir >= valorEsq)){
-        return direita;
-    }else{
-        if(((CAPACIDADE_TOTAL - valorEsq) >= tamanhoArq)){
-            return esquerda;
-        }
-    }
-
-}
-
 int buscaFila(filaPrioridade *fp, int tamanhoArq, int filho){
     int direita = 2*filho + 2, esquerda = 2*filho + 1;
-    if(fp->vetDisco[filho] == NULL)
-        return -1;
+
     if(CAPACIDADE_TOTAL - getCapacidade(fp->vetDisco[filho]) >= tamanhoArq)
         return filho;
     if(fp->vetDisco[direita] == NULL && fp->vetDisco[esquerda] == NULL){
