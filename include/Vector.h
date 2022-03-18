@@ -54,5 +54,12 @@ int comparaVetor(const void *a, const void *b);
 */
 void ordenaVetor(vector *vet);
 
+/**
+* @brief:Funcao para realizar a soma dos componentes internos da estrutura;
+* @param vec: Um ponteiro para um estrutura vector previamente preenchida;
+* @return: Um double correspondente a soma dos componentes em escala de 1000000;
+*/
+double somaVetorEmEscala(vector *vec);
+
 
 #endif

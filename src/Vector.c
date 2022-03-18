@@ -49,3 +49,11 @@ void liberaVector(vector *vec){
     free(vec->vetTamanhos);
     free(vec);
 }
+
+double somaVetorEmEscala(vector *vec){
+    double soma = 0.0;
+    for(int i=0; i<vec->tam ;i++){
+        soma += vec->vetTamanhos[i];
+    }
+    return soma/1000000;
+}
